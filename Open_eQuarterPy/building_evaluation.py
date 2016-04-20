@@ -3,6 +3,7 @@ import numpy as np
 
 from mole.stat_corr import *
 
+
 def add_col(df, colname):
     if colname not in df:
         df[colname] = None
@@ -208,5 +209,3 @@ def evaluate_building(data):
     data['AHDP'] = data.HLAP + 40.0 * 0.8
 
     return data
-
-print(common_walls_by_population_density_corr.get(1950))
