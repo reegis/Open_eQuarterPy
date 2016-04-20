@@ -209,4 +209,4 @@ def evaluate_building(data):
 
     return data
 
-print(common_walls_by_population_density_corr.get([1945, 1950]))
+print(common_walls_by_population_density_corr.get(1950))
