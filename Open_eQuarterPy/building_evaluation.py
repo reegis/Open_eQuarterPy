@@ -116,7 +116,7 @@ def evaluate_building(data):
         data.population_density)
 
     # Area of the walls
-    data['wall_area_brutto'] = data.perimeter * data.height
+    data['wall_area_gross'] = data.perimeter * data.height
     data['wall_area'] = ((data.perimeter - data.common_walls * data.width) *
                          data.height * (1 - data.window_ratio))
 
