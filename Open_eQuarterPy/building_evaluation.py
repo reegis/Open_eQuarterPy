@@ -20,10 +20,19 @@ def add_col(df, colname):
 
 
 def evaluate_building(data):
-    # Most buildings have a rectangular floor projection. As the Golden Rule
-    # is one of the most common rules in construction esthetics it seems to
-    # make sense to use its ratio for width, length and - if necessary -
-    # perimeter estimations.
+    """Calculating the heat demand of a building based on the calculations of
+    the Open_eQuarter qgis plugin.
+
+    Parameters
+    ----------
+    data : pandas.DataFrame
+        Containing the known values as columns.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Containing the calculated values as columns.
+    """
     p = pd.DataFrame()
 
     # Set default values
