@@ -1,7 +1,16 @@
 import pandas as pd
 import numpy as np
 
-from mole.stat_corr import *
+from mole.stat_corr import window_wall_ratio_AVG_by_building_age_lookup
+from mole.stat_corr import common_walls_by_population_density_corr
+from mole.stat_corr import present_base_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import contemporary_base_uvalue_by_building_age_lookup
+from mole.stat_corr import present_wall_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import contemporary_wall_uvalue_by_building_age_lookup
+from mole.stat_corr import present_window_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import contemporary_window_uvalue_by_building_age_lookup
+from mole.stat_corr import present_roof_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import contemporary_roof_uvalue_by_building_age_lookup
 
 
 def add_col(df, colname):
