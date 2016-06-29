@@ -44,6 +44,7 @@ def evaluate_building(data):
     p.default_average_build_year = 1950
     p.default_population_density = 10000
     p.default_accumulated_heating_hours = 66000
+    p.fraction_living_area = kwargs.get('fraction_living_area', 0.8)
 
     # TODO: Default floors by "stadtstrukturatlas"
     p.default_floors = 5
@@ -142,7 +143,7 @@ def evaluate_building(data):
     data['a_v_relation'] = data.a_envelope / data.volume
 
     # Living area
-    data['living_area'] = data.area * data.floors * 0.8
+    data['living_area'] = data.area * data.floors * p.fraction_living_area
 
     # Heating hours
     p['heating_hours'] = p.heating_degree_days * 24
@@ -223,7 +224,7 @@ def evaluate_building(data):
     # Specific heat losses
     data['HLAC'] = data.total_loss_contemp / data.living_area
     data['HLAP'] = data.total_loss_pres / data.living_area
-    data['AHDC'] = data.HLAC + 40.0 * 0.8
-    data['AHDP'] = data.HLAP + 40.0 * 0.8
+    data['AHDC'] = data.HLAC + 40.0 * p.fraction_living_area
+    data['AHDP'] = data.HLAP + 40.0 * p.fraction_living_area
 
     return data
