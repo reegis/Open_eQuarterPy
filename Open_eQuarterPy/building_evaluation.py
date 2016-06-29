@@ -19,7 +19,7 @@ def add_col(df, colname):
     return df
 
 
-def evaluate_building(data):
+def evaluate_building(data, **kwargs):
     """Calculating the heat demand of a building based on the calculations of
     the Open_eQuarter qgis plugin.
 
@@ -36,18 +36,22 @@ def evaluate_building(data):
     p = pd.DataFrame()
 
     # Set default values
-    p.ratio_solar_available = 0.5
-    p.ratio_solar_installable = 0.5
-    p.solar_earnings_per_sqm = 300
-    p.average_heat_demand_per_sqm = 120
-    p.heating_degree_days = 2750
-    p.default_average_build_year = 1950
-    p.default_population_density = 10000
-    p.default_accumulated_heating_hours = 66000
+    p.ratio_solar_available = kwargs.get('ratio_solar_available', 0.5)
+    p.ratio_solar_installable = kwargs.get('ratio_solar_installable', 0.5)
+    p.solar_earnings_per_sqm = kwargs.get('solar_earnings_per_sqm', 300)
+    p.average_heat_demand_per_sqm = kwargs.get(
+        'average_heat_demand_per_sqm', 120)
+    p.heating_degree_days = kwargs.get('heating_degree_days', 2750)
+    p.default_average_build_year = kwargs.get(
+        'default_average_build_year', 1950)
+    p.default_population_density = kwargs.get(
+        'default_population_density', 10000)
+    p.default_accumulated_heating_hours = kwargs.get(
+        'default_accumulated_heating_hours', 66000)
     p.fraction_living_area = kwargs.get('fraction_living_area', 0.8)
 
     # TODO: Default floors by "stadtstrukturatlas"
-    p.default_floors = 5
+    p.default_floors = kwargs.get('default_floors', 5)
 
     # Create missing columns
     add_col(data, 'width')
