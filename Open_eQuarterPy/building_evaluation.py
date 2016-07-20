@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import logging
 
 from mole.stat_corr import window_wall_ratio_AVG_by_building_age_lookup
 from mole.stat_corr import common_walls_by_population_density_corr
@@ -33,6 +34,8 @@ def evaluate_building(data, **kwargs):
     pandas.DataFrame
         Containing the calculated values as columns.
     """
+    logging.info("Starting evaluation...")
+    logging.info("Setting default values...")
     p = pd.DataFrame()
 
     # Set default values
@@ -116,6 +119,7 @@ def evaluate_building(data, **kwargs):
     data.flatroof_ratio = (roof_h + roof_a) / 2
 
     # ***** GEOMETRY *****
+    logging.info("Determining the geometry.")
     # Statistical number of common walls
     data['common_walls'] = common_walls_by_population_density_corr.get(
         data.population_density)
@@ -149,9 +153,11 @@ def evaluate_building(data, **kwargs):
     # Living area
     data['living_area'] = data.area * data.floors * p.fraction_living_area
 
+    logging.info("Determining the transmission losses...")
     # Heating hours
     p['heating_hours'] = p.heating_degree_days * 24
 
+    logging.info("...base...")
     # transmission heat losses (QT) of the base
     data['base_uvalue_pres'] = (
         present_base_uvalue_AVG_by_building_age_lookup.get(
@@ -167,6 +173,7 @@ def evaluate_building(data, **kwargs):
     data['base_spec_loss_pres'] = data.base_loss_pres / data.base_area
 
     # transmission heat losses (QT) of the walls
+    logging.info("...wall...")
     data['wall_uvalue_pres'] = (
         present_wall_uvalue_AVG_by_building_age_lookup.get(
             data.year_of_construction))
@@ -181,6 +188,7 @@ def evaluate_building(data, **kwargs):
     data['wall_spec_loss_pres'] = data.wall_loss_pres / data.wall_area
 
     # transmission heat losses (QT) of the windows
+    logging.info("...windows...")
     data['window_uvalue_pres'] = (
         present_window_uvalue_AVG_by_building_age_lookup.get(
             data.year_of_construction))
@@ -198,6 +206,7 @@ def evaluate_building(data, **kwargs):
                                      data.window_area)
 
     # transmission heat losses (QT) of the  roof
+    logging.info("...roof...")
     data['roof_uvalue_pres'] = (
         present_roof_uvalue_AVG_by_building_age_lookup.get(
             data.year_of_construction))
@@ -211,6 +220,7 @@ def evaluate_building(data, **kwargs):
     data['roof_spec_loss_contemp'] = data.roof_loss_contemp / data.roof_area
     data['roof_spec_loss_pres'] = data.roof_loss_pres / data.roof_area
 
+    logging.info("...total.")
     # Air change heat loss
     data['air_change_heat_loss'] = 40 * data.living_area
 
