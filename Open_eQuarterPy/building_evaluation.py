@@ -52,6 +52,8 @@ def evaluate_building(data, **kwargs):
     p.default_accumulated_heating_hours = kwargs.get(
         'default_accumulated_heating_hours', 66000)
     p.fraction_living_area = kwargs.get('fraction_living_area', 0.8)
+    p.default_residential_fraction = kwargs.get(
+        'default_residential_fraction', 1)
 
     # TODO: Default floors by "stadtstrukturatlas"
     p.default_floors = kwargs.get('default_floors', 5)
@@ -64,6 +66,7 @@ def evaluate_building(data, **kwargs):
     add_col(data, 'common_walls')
     add_col(data, 'year_of_construction')
     add_col(data, 'accumulated_heating_hours')
+    add_col(data, 'residential_fraction')
 
     # Set non values to zero for column 'length'
     data.length.fillna(0, inplace=True)
@@ -93,6 +96,7 @@ def evaluate_building(data, **kwargs):
         'year_of_construction': p.default_average_build_year,
         'population_density': p.default_population_density,
         'accumulated_heating_hours': p.default_accumulated_heating_hours,
+        'residential_fraction': p.default_residential_fraction,
         }, inplace=True)
 
     data.loc[data.population_density <= 0, 'population_density'] = (
@@ -151,7 +155,8 @@ def evaluate_building(data, **kwargs):
     data['a_v_relation'] = data.a_envelope / data.volume
 
     # Living area
-    data['living_area'] = data.area * data.floors * p.fraction_living_area
+    data['living_area'] = (data.area * data.floors * data.residential_fraction *
+                           p.fraction_living_area)
 
     logging.info("Determining the transmission losses...")
     # Heating hours
