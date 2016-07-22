@@ -242,6 +242,13 @@ def evaluate_building(data, **kwargs):
                                          data.roof_loss_contemp) *
                                         data.residential_fraction)
 
+    # Total losses (transmission and air change)
+    data['total_loss_pres'] = (data.total_trans_loss_pres +
+                               data.air_change_heat_loss)
+
+    data['total_loss_contemp'] = (data.total_trans_loss_contemp +
+                                  data.air_change_heat_loss)
+
     # Specific heat losses
     data['HLAC'] = data.total_loss_contemp / data.living_area
     data['HLAP'] = data.total_loss_pres / data.living_area
