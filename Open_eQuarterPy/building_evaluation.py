@@ -155,8 +155,8 @@ def evaluate_building(data, **kwargs):
     data['a_v_relation'] = data.a_envelope / data.volume
 
     # Living area
-    data['living_area'] = (data.area * data.floors * data.residential_fraction *
-                           p.fraction_living_area)
+    data['living_area'] = (data.area * data.floors * p.fraction_living_area *
+                           data.residential_fraction)
 
     logging.info("Determining the transmission losses...")
     # Heating hours
@@ -230,15 +230,17 @@ def evaluate_building(data, **kwargs):
     data['air_change_heat_loss'] = 40 * data.living_area
 
     # Total transmission heat losses (QT total)
-    data['total_loss_pres'] = (data.base_loss_pres +
-                               data.wall_loss_pres +
-                               data.window_loss_pres * 1.2 +
-                               data.roof_loss_pres)
+    data['total_trans_loss_pres'] = ((data.base_loss_pres +
+                                      data.wall_loss_pres +
+                                      data.window_loss_pres * 1.2 +
+                                      data.roof_loss_pres) *
+                                     data.residential_fraction)
 
-    data['total_loss_contemp'] = (data.base_loss_contemp +
-                                  data.wall_loss_contemp +
-                                  data.window_loss_contemp * 1.2 +
-                                  data.roof_loss_contemp)
+    data['total_trans_loss_contemp'] = ((data.base_loss_contemp +
+                                         data.wall_loss_contemp +
+                                         data.window_loss_contemp * 1.2 +
+                                         data.roof_loss_contemp) *
+                                        data.residential_fraction)
 
     # Specific heat losses
     data['HLAC'] = data.total_loss_contemp / data.living_area
