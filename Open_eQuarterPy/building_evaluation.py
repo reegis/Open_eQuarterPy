@@ -250,8 +250,8 @@ def evaluate_building(data, **kwargs):
                                   data.air_change_heat_loss)
 
     # Specific heat losses
-    data['HLAC'] = data.total_loss_contemp / data.living_area
-    data['HLAP'] = data.total_loss_pres / data.living_area
+    data['HLAC'] = data.total_trans_loss_contemp / data.living_area
+    data['HLAP'] = data.total_trans_loss_pres / data.living_area
     data['AHDC'] = data.HLAC + data.air_change_heat_loss
     data['AHDP'] = data.HLAP + data.air_change_heat_loss
 
