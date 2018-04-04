@@ -4,6 +4,7 @@ Stand alone python script of the `Open_eQuarter qgis plugin <https://github.com/
 
 Python 3.x
 
-    pip install git+https://github.com/uvchik/Open_eQuarter.git
-    
+.. code-block::
+
+    pip install git+https://github.com/uvchik/Open_eQuarter.git    
     pip install git+https://github.com/reegis/Open_eQuarterPy.git
