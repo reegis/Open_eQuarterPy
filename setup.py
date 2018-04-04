@@ -8,5 +8,5 @@ setup(name='Open_eQuarterPy',
       author_email='uwe.krien@rl-institut.de',
       description='A local heat and power system',
       package_dir={'Open_eQuarterPy': 'Open_eQuarterPy'},
-      install_requires=['pandas >= 0.18']
+      install_requires=['pandas >= 0.18', 'numpy']
       )

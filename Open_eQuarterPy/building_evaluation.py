@@ -4,14 +4,18 @@ import logging
 
 from mole.stat_corr import window_wall_ratio_AVG_by_building_age_lookup
 from mole.stat_corr import common_walls_by_population_density_corr
-from mole.stat_corr import present_base_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import contemporary_base_uvalue_by_building_age_lookup
-from mole.stat_corr import present_wall_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import contemporary_wall_uvalue_by_building_age_lookup
-from mole.stat_corr import present_window_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import contemporary_window_uvalue_by_building_age_lookup
-from mole.stat_corr import present_roof_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import contemporary_roof_uvalue_by_building_age_lookup
+from mole.stat_corr import rb_present_base_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import rb_contemporary_base_uvalue_by_building_age_lookup
+from mole.stat_corr import rb_present_wall_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import rb_contemporary_wall_uvalue_by_building_age_lookup
+from mole.stat_corr import rb_present_window_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import rb_contemporary_window_uvalue_by_building_age_lookup
+from mole.stat_corr import rb_present_roof_uvalue_AVG_by_building_age_lookup
+from mole.stat_corr import rb_contemporary_roof_uvalue_by_building_age_lookup
+
+# TODO: In the actual version of Open_eQuarter it is possible to distinguish
+# between residential buildings (rb) and non-residential buildings (nrb). This
+# is not implemented in Open_eQuarterPy so far.
 
 
 def add_col(df, colname):
@@ -165,10 +169,10 @@ def evaluate_building(data, **kwargs):
     logging.info("...base...")
     # transmission heat losses (QT) of the base
     data['base_uvalue_pres'] = (
-        present_base_uvalue_AVG_by_building_age_lookup.get(
+        rb_present_base_uvalue_AVG_by_building_age_lookup.get(
             data.year_of_construction))
     data['base_uvalue_contemp'] = (
-        contemporary_base_uvalue_by_building_age_lookup.get(
+        rb_contemporary_base_uvalue_by_building_age_lookup.get(
             data.year_of_construction))
     data['base_loss_pres'] = (data.base_area * data.base_uvalue_pres *
                               data.accumulated_heating_hours / 1000 * 0.35)
@@ -180,10 +184,10 @@ def evaluate_building(data, **kwargs):
     # transmission heat losses (QT) of the walls
     logging.info("...wall...")
     data['wall_uvalue_pres'] = (
-        present_wall_uvalue_AVG_by_building_age_lookup.get(
+        rb_present_wall_uvalue_AVG_by_building_age_lookup.get(
             data.year_of_construction))
     data['wall_uvalue_contemp'] = (
-        contemporary_wall_uvalue_by_building_age_lookup.get(
+        rb_contemporary_wall_uvalue_by_building_age_lookup.get(
             data.year_of_construction))
     data['wall_loss_pres'] = (data.wall_area * data.wall_uvalue_pres *
                               data.accumulated_heating_hours / 1000)
@@ -195,10 +199,10 @@ def evaluate_building(data, **kwargs):
     # transmission heat losses (QT) of the windows
     logging.info("...windows...")
     data['window_uvalue_pres'] = (
-        present_window_uvalue_AVG_by_building_age_lookup.get(
+        rb_present_window_uvalue_AVG_by_building_age_lookup.get(
             data.year_of_construction))
     data['window_uvalue_contemp'] = (
-        contemporary_window_uvalue_by_building_age_lookup.get(
+        rb_contemporary_window_uvalue_by_building_age_lookup.get(
             data.year_of_construction))
     data['window_loss_pres'] = (data.window_area * data.window_uvalue_pres *
                                 data.accumulated_heating_hours / 1000)
@@ -213,10 +217,10 @@ def evaluate_building(data, **kwargs):
     # transmission heat losses (QT) of the  roof
     logging.info("...roof...")
     data['roof_uvalue_pres'] = (
-        present_roof_uvalue_AVG_by_building_age_lookup.get(
+        rb_present_roof_uvalue_AVG_by_building_age_lookup.get(
             data.year_of_construction))
     data['roof_uvalue_contemp'] = (
-        contemporary_roof_uvalue_by_building_age_lookup.get(
+        rb_contemporary_roof_uvalue_by_building_age_lookup.get(
             data.year_of_construction))
     data['roof_loss_pres'] = (data.roof_area * data.roof_uvalue_pres *
                               data.accumulated_heating_hours / 1000)
