@@ -120,7 +120,7 @@ def evaluate_building(data, **kwargs):
                   (data.year_of_construction >= 1860))
     roof_a[age_interv] = 1/100 * (data.year_of_construction[age_interv] - 1860)
     roof_a[data.year_of_construction > 1960] = 1
-    data.flatroof_ratio = (roof_h + roof_a) / 2
+    data['flatroof_ratio'] = (roof_h + roof_a) / 2
 
     # ***** GEOMETRY *****
     logging.info("Determining the geometry.")
