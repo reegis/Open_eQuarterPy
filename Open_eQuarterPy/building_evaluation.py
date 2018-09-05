@@ -2,16 +2,16 @@ import pandas as pd
 import numpy as np
 import logging
 
-from mole.stat_corr import window_wall_ratio_AVG_by_building_age_lookup
-from mole.stat_corr import common_walls_by_population_density_corr
-from mole.stat_corr import rb_present_base_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import rb_contemporary_base_uvalue_by_building_age_lookup
-from mole.stat_corr import rb_present_wall_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import rb_contemporary_wall_uvalue_by_building_age_lookup
-from mole.stat_corr import rb_present_window_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import rb_contemporary_window_uvalue_by_building_age_lookup
-from mole.stat_corr import rb_present_roof_uvalue_AVG_by_building_age_lookup
-from mole.stat_corr import rb_contemporary_roof_uvalue_by_building_age_lookup
+from .stat_corr import window_wall_ratio_AVG_by_building_age_lookup
+from .stat_corr import common_walls_by_population_density_corr
+from .stat_corr import rb_present_base_uvalue_AVG_by_building_age_lookup
+from .stat_corr import rb_contemporary_base_uvalue_by_building_age_lookup
+from .stat_corr import rb_present_wall_uvalue_AVG_by_building_age_lookup
+from .stat_corr import rb_contemporary_wall_uvalue_by_building_age_lookup
+from .stat_corr import rb_present_window_uvalue_AVG_by_building_age_lookup
+from .stat_corr import rb_contemporary_window_uvalue_by_building_age_lookup
+from .stat_corr import rb_present_roof_uvalue_AVG_by_building_age_lookup
+from .stat_corr import rb_contemporary_roof_uvalue_by_building_age_lookup
 
 # TODO: In the actual version of Open_eQuarter it is possible to distinguish
 # between residential buildings (rb) and non-residential buildings (nrb). This
